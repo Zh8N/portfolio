@@ -1,6 +1,17 @@
 <!doctype html>
 <html lang="ru">
 <head>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=113089905", "ym");
+   ym(113089905, "init", {ssr:true, clickmap:true, referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113089905" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Жанна Носова — Senior / Lead Product Designer</title>
@@ -789,9 +800,10 @@ h1, h2, h3, .logo, .card__title, .job__role, .contact__mail { font-family: var(-
       else await say(it.a, it.l);
     });
   }
-  function askRole(k) { const r = ROLES[k]; run(r.q, async () => { mode = 'main'; await say(r.a, r.l); }); }
+  function askRole(k) { const r = ROLES[k]; goal('shanti_role'); run(r.q, async () => { mode = 'main'; await say(r.a, r.l); }); }
+  const goal = (g) => { try { window.ym && ym(113089905, 'reachGoal', g); } catch (e) {} };
   function open() {
-    panel.classList.add('is-open'); dog.setAttribute('aria-expanded', 'true'); clearTimeout(poseTimer); setPose('tilt'); tease.classList.remove('is-on'); ss('sh-teased', '1');
+    panel.classList.add('is-open'); dog.setAttribute('aria-expanded', 'true'); goal('shanti_open'); clearTimeout(poseTimer); setPose('tilt'); tease.classList.remove('is-on'); ss('sh-teased', '1');
     if (!started) { started = true; renderChips(); say('Woof. Я Шанти, ассистент этого сайта. Отвечаю только фактами. С чего начнём?'); }
     setTimeout(() => chips.querySelector('.sh-chip')?.focus({ preventScroll: true }), 50);
   }
