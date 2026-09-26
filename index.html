@@ -1,0 +1,834 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[точки] Жанна Носова — Senior / Lead Product Designer</title>
+<meta name="description" content="Жанна Носова — продуктовый дизайнер уровня Senior / Lead. Enterprise, B2B/B2E, дизайн-системы, AI в дизайн-процессе.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300..700&family=Martian+Mono:wght@300..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=7">
+<style>
+/* ===== Деликатная версия первого экрана (черновик для сравнения) ===== */
+.soft .spec-tag, .soft .spec-guide, .soft .method, .soft .t-arrow { display: none !important; }
+.soft .hero__title--spec { padding: 0; margin: 0 0 26px; }
+.soft .hero__title--spec .t1 { font-size: clamp(40px, 4.6vw, 80px); font-weight: 600; letter-spacing: -.03em; line-height: 1.02; }
+.soft .hero__title--spec .t2 { font-size: clamp(42px, 4.9vw, 86px); line-height: 1.04; color: #bdb6e6; }
+.soft .hero .eyebrow { font-size: 11px; opacity: .85; margin-bottom: 26px; }
+.soft .hero__lead { font-size: 15px; line-height: 1.65; max-width: 30em; color: rgba(245,245,242,.72); margin-bottom: 30px; }
+.soft .hero__cta .btn { padding: 12px 20px; font-size: 11px; }
+.soft .hero__glow { opacity: .78; }
+.soft .hero::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: rgba(20,19,26,.34); }
+.soft .hero__inner { max-width: calc(var(--container) - 2 * var(--gutter)); }
+
+
+/* ===== Инспектор: любой элемент раскладывается на токены ===== */
+.inspect-hint { display: none; margin-top: 22px; font-family: var(--mono); font-size: 11px; letter-spacing: .04em; color: rgba(245,245,242,.42); }
+.inspect-hint b { font-weight: 500; color: rgba(199,194,216,.8); }
+@media (pointer: fine) { .inspect-hint { display: block; } }
+.ix { position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: 0; transition: opacity .18s ease; }
+.ix.on { opacity: 1; }
+.ix__box { position: fixed; outline: 1px solid #bdb6e6; background: rgba(107,92,255,.05); transition: all .16s cubic-bezier(.2,.7,.2,1); }
+.ix__content { position: fixed; outline: 1px dashed rgba(143,134,255,.7); transition: all .16s cubic-bezier(.2,.7,.2,1); }
+.ix__name { position: fixed; font: 500 10px/1 var(--mono); letter-spacing: .04em; color: #fff; background: #6b5cff; padding: 4px 6px; white-space: nowrap; transition: all .16s cubic-bezier(.2,.7,.2,1); }
+.ix__size { position: fixed; font: 500 10px/1 var(--mono); color: #fff; background: rgba(20,19,26,.85); padding: 3px 5px; white-space: nowrap; transition: all .16s cubic-bezier(.2,.7,.2,1); }
+.ix__tokens { position: fixed; display: flex; flex-direction: column; gap: 4px; }
+.ix__tok { font: 400 10.5px/1.2 var(--mono); color: #e9e7f5; background: rgba(20,19,26,.9); border: 1px solid rgba(143,134,255,.35); padding: 5px 8px; white-space: nowrap; opacity: 0; transform: translateX(-6px); transition: opacity .22s ease, transform .22s ease; }
+.ix__tok i { font-style: normal; color: #bdb6e6; margin-right: 8px; }
+.ix__tok s { text-decoration: none; display: inline-block; width: 9px; height: 9px; margin-right: 6px; vertical-align: -1px; border: 1px solid rgba(255,255,255,.3); }
+.ix.on .ix__tok { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .ix, .ix * { transition: none !important; } }
+
+/* ===== Работы: плитки-перевёртыши ===== */
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 48px; }
+@media (max-width: 960px) { .tiles { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .tiles { grid-template-columns: 1fr; } }
+.tile { display: block; aspect-ratio: 808 / 632; perspective: 1600px; text-decoration: none; color: var(--fg); outline: none; }
+.tile__in { position: relative; display: block; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .75s cubic-bezier(.2,.7,.2,1); }
+@media (hover: hover) { .tile:hover .tile__in { transform: rotateY(180deg); } }
+.tile:focus-visible .tile__in, .tile.is-flipped .tile__in { transform: rotateY(180deg); }
+.tile:focus-visible { box-shadow: 0 0 0 2px var(--accent); }
+.tile__face { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(18px, 1.8vw, 26px); -webkit-backface-visibility: hidden; backface-visibility: hidden; overflow: hidden; }
+.tile__front { background: var(--bg); }
+.tile__back { transform: rotateY(180deg); background: #14131a; padding: 0; }
+.tile__back img { width: 100%; height: 100%; object-fit: cover; }
+.tile__top { display: flex; justify-content: space-between; gap: 12px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; opacity: .72; }
+.tile__tag { text-align: right; }
+.tile__bottom { display: flex; flex-direction: column; gap: 10px; }
+.tile__title { font-family: var(--sans); font-weight: 600; font-size: clamp(19px, 1.65vw, 25px); line-height: 1.18; letter-spacing: -.02em; max-width: 16em; }
+.tile__fact { font-family: var(--mono); font-size: 11.5px; line-height: 1.45; opacity: .74; }
+.tile__fact::before { content: "// "; opacity: .6; }
+.tile__cta { position: absolute; left: 0; right: 0; bottom: 0; padding: 36px 20px 16px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: linear-gradient(rgba(20,19,26,0), rgba(20,19,26,.86)); }
+.tile__nocover { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 26px; background: #14131a; color: #f5f5f2; font-family: var(--sans); font-size: 20px; font-weight: 600; letter-spacing: -.02em; }
+.tile__nocover .tile__num { font-family: var(--mono); font-size: 11px; opacity: .6; font-weight: 400; }
+.tile__cta--plain { background: none; padding: 0 26px 22px; color: #bdb6e6; }
+.tiles__more { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 14px 28px; margin-top: 22px; font-family: var(--mono); font-size: 11px; letter-spacing: .04em; color: var(--text-2); }
+.tiles__links { display: flex; gap: 28px; flex-wrap: wrap; }
+@media (hover: none) { .tiles__more > span:first-child { visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) {
+  .tile__in { transition: none; transform: none !important; }
+  .tile__back { transform: none; opacity: 0; transition: opacity .25s; }
+  .tile:hover .tile__back, .tile.is-flipped .tile__back, .tile:focus-visible .tile__back { opacity: 1; }
+}
+
+/* ===== Глаз: токены по желанию ===== */
+.ix-toggle { display: none; align-items: center; gap: 8px; border: 1px solid currentColor; background: none; color: inherit; cursor: pointer; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; padding: 7px 11px; line-height: 1; opacity: .75; transition: opacity .2s, background .2s, color .2s, border-color .2s; }
+@media (pointer: fine) { .ix-toggle { display: inline-flex; } }
+.ix-toggle:hover { opacity: 1; }
+.ix-toggle[aria-pressed="true"] { opacity: 1; background: rgba(107,92,255,.14); border-color: #bdb6e6; color: #bdb6e6; }
+.hero .ix-toggle[aria-pressed="true"] { color: #bdb6e6; }
+.ix-toggle .eye__slash { transition: opacity .2s; }
+.ix-toggle .eye__pupil { transition: r .2s; }
+.ix-toggle[aria-pressed="true"] .eye__slash { opacity: 0; }
+.ix-toggle[aria-pressed="false"] .eye__pupil { opacity: .5; }
+.ix-toggle--nav { padding: 7px 9px; margin-right: 4px; }
+.ix-toggle--nav .ix-toggle__label { display: none; }
+.inspect-hint { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.inspect-hint__note { color: rgba(245,245,242,.4); }
+@media not (pointer: fine) { .inspect-hint { display: none; } }
+.ix-toggle--hero { color: rgba(245,245,242,.85); border-color: rgba(245,245,242,.3); }
+html:not(.ix-enabled) .ix { display: none; }
+/* Плитки: переворот медленнее и мягче, с короткой паузой перед стартом */
+.tile__in { transition: transform 1.15s cubic-bezier(.45,.05,.2,1); }
+@media (hover: hover) { .tile:hover .tile__in { transition-delay: .12s; } }
+
+/* ===== v3: переключатель токенов в шапке, статус — зелёная точка у имени ===== */
+.ix-toggle--nav { position: relative; padding: 7px 11px; margin-right: 0; }
+.ix-toggle--nav .ix-toggle__label { display: inline; }
+.ix-toggle[data-tip]:not([data-tip=""])::after, .avail::after { content: attr(data-tip); position: absolute; top: calc(100% + 10px); right: 0; width: max-content; max-width: 260px; padding: 7px 10px; background: #14131a; color: #e9e7f5; border: 1px solid rgba(143,134,255,.35); font-family: var(--mono); font-size: 10.5px; line-height: 1.4; letter-spacing: .02em; text-transform: none; white-space: normal; text-align: left; opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity .2s, transform .2s; z-index: 100; }
+.ix-toggle[data-tip]:not([data-tip=""]):hover::after, .avail:hover::after { opacity: 1; transform: none; }
+.ix-toggle.is-pinged { animation: ix-ping .9s ease-out; }
+@keyframes ix-ping { 0% { box-shadow: 0 0 0 0 rgba(143,134,255,.55); } 100% { box-shadow: 0 0 0 9px rgba(143,134,255,0); } }
+@media (prefers-reduced-motion: reduce) { .ix-toggle.is-pinged { animation: none; } }
+.logo { display: inline-flex; align-items: center; }
+.avail { position: relative; display: inline-flex; align-items: center; padding: 6px 4px 6px 10px; cursor: default; }
+.avail i { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; animation: ping 2.4s infinite; }
+.avail::after { left: 0; right: auto; font-weight: 400; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ===== Точечный первый экран (эксперимент) ===== */
+.hero.has-canvas .hero__canvas { filter: none; transform: none; image-rendering: pixelated; }
+.hero.has-canvas::before { background: radial-gradient(ellipse 85% 80% at 55% 48%, transparent 60%, rgba(20,19,26,.55) 100%); }
+.hero__marks { position: absolute; inset: 92px var(--gutter) 28px; z-index: 2; pointer-events: none; }
+.hero__marks i { position: absolute; width: 6px; height: 6px; background: rgba(245,245,242,.55); }
+.hero__marks i:nth-child(1) { left: 0; top: 0; } .hero__marks i:nth-child(2) { right: 0; top: 0; }
+.hero__marks i:nth-child(3) { left: 0; bottom: 0; } .hero__marks i:nth-child(4) { right: 0; bottom: 0; }
+.hero__coord { position: absolute; z-index: 2; top: 102px; font: 400 10.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: rgba(245,245,242,.45); pointer-events: none; }
+.hero__coord--l { left: calc(var(--gutter) + 18px); } .hero__coord--r { right: calc(var(--gutter) + 18px); }
+.hero .eyebrow--light::before { content: "// "; color: #bdb6e6; }
+@media (max-width: 560px) { .hero__coord { display: none; } }
+
+
+/* ===== Цветовая шкала: одно индиго от тёмного к светлому ===== */
+:root {
+  --ink: #14131a; --paper: #f5f5f9; --sand: #f5f5f9;
+  --violet-900: #241a6b; --violet-700: #4b2fa8; --violet-500: #6b5cff; --violet-300: #bdb6e6; --violet-100: #e4e0f7;
+  --accent: var(--violet-500); --violet-deep: var(--violet-700);
+  --line: rgba(20, 19, 26, .10);
+}
+body { background: var(--paper); }
+.section--sand, .section--paper { background: var(--paper); }
+.section + .section { border-top: 1px solid var(--line); }
+/* мелкий фиолетовый текст на светлом — только violet-700 (контраст 8:1) */
+.section .eyebrow, .pillar__num, .also__all, .card__pass, .job__years, .section .tiles__more a { color: var(--violet-700); }
+.section .eyebrow::before { color: var(--violet-700); }
+.tile__nocover { background: var(--ink); }
+
+/* ===== Тексты v2: длинный заголовок и строка-доказательство ===== */
+.soft .hero__title--spec .t1, .soft .hero__title--spec .t2 { font-size: clamp(36px, 4.3vw, 68px); line-height: 1.04; }
+.hero__proof { font: 400 11.5px/1.5 var(--mono); letter-spacing: .04em; color: rgba(245,245,242,.62); margin: -14px 0 28px; }
+.hero__proof::before { content: "// "; color: var(--violet-300); }
+.section__title { max-width: 16em; }
+/* ===== Типографика B: Geologica + Martian Mono + Pixelify Sans ===== */
+:root { --sans: "Geologica", "Helvetica Neue", Arial, sans-serif; --serif: "Geologica", "Helvetica Neue", Arial, sans-serif; --mono: "Martian Mono", ui-monospace, "SF Mono", Menlo, monospace; --pixel: "Pixelify Sans", var(--mono); }
+body { font-feature-settings: normal; }
+h1, h2, h3, .logo, .card__title, .job__role, .contact__mail { font-family: var(--sans); font-weight: 600; letter-spacing: -.025em; }
+.section__title { font-weight: 600; letter-spacing: -.04em; line-height: 1.02; }
+.contact__title { font-weight: 600; letter-spacing: -.045em; }
+.hero__title--spec .t1 { font-weight: 600; letter-spacing: -.045em; }
+/* пиксельный акцент вместо курсива */
+.hero__title--spec .t2, .hero__title--spec .t2 em { font-family: var(--sans); font-style: normal; font-weight: 600; letter-spacing: -.045em; }
+.soft .hero__title--spec .t2 { font-size: clamp(40px, 4.6vw, 80px); line-height: 1.02; }
+.section__title em, .contact__title em, .hero__title em { font-family: var(--sans); font-style: normal; font-weight: 600; letter-spacing: inherit; }
+.pillar__num { font-family: var(--mono); font-style: normal; font-weight: 300; font-size: 36px; letter-spacing: -.02em; opacity: 1; color: var(--violet-700); }
+/* Martian Mono шире — подписи чуть мельче */
+.eyebrow, .card__pass, .card__foot, .also__label, .job__years, .basis__label, .tile__top, .tile__fact, .tiles__more, .nav a, .btn, .ix-toggle, .hero__coord, .sh-label, .inspect-hint { font-size: .92em; letter-spacing: .06em; }
+.tile__top { font-size: 10px; letter-spacing: .04em; } .tile__fact { font-size: 10.5px; letter-spacing: 0; }
+.sh-head b { font-family: var(--sans); font-weight: 600; font-size: 16px; letter-spacing: -.01em; }
+</style>
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body class="soft">
+
+<header class="site-header" id="top">
+  <a class="logo" href="#top">Жанна Носова<span class="avail" data-tip="Открыта к предложениям · Senior / Lead / Head of Design"><i aria-hidden="true"></i><span class="sr">— открыта к предложениям</span></span></a>
+  <nav class="nav" aria-label="Основная навигация">
+    <a href="#work">Работы</a>
+    <a href="#experience">Опыт</a>
+    <a href="#contact">Контакты</a>
+    <button class="ix-toggle ix-toggle--nav" type="button" aria-pressed="true" data-tip=""><svg class="eye" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path class="eye__lid" d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle class="eye__pupil" cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path class="eye__slash" d="M4 20 20 4" stroke="currentColor" stroke-width="1.5"/></svg><span class="ix-toggle__label">Скрыть токены</span></button>
+  </nav>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__glow" aria-hidden="true">
+      <div class="gw gw--1"><span class="glow glow--1"></span></div>
+      <div class="gw gw--2"><span class="glow glow--2"></span></div>
+      <div class="gw gw--3"><span class="glow glow--3"></span></div>
+      <canvas class="hero__canvas"></canvas>
+    </div>
+    <div class="hero__marks" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <span class="hero__coord hero__coord--l" aria-hidden="true">//portfolio_2026</span><span class="hero__coord hero__coord--r" aria-hidden="true">remote · open to offers</span>
+    <div class="hero__inner">
+      <p class="eyebrow eyebrow--light reveal">Senior / Lead Product Designer · Enterprise · Design Systems · AI</p>
+      <h1 class="hero__title hero__title--spec reveal">
+        <span class="spec-tag spec-tag--top" aria-hidden="true">H1 · Onest 600 · −3.5%</span>
+        <span class="t1">Проектирую рабочие системы</span>
+        <span class="t2"><span class="t-arrow" aria-hidden="true">→</span><em>для больших компаний.</em></span>
+        <span class="spec-tag spec-tag--side" aria-hidden="true">token: accent / italic · Playfair</span>
+        <i class="spec-guide spec-guide--v" aria-hidden="true"></i><i class="spec-guide spec-guide--h" aria-hidden="true"></i>
+      </h1>
+      <p class="hero__lead reveal">Сначала логика, роли и крайние случаи — потом экраны. Корпоративные приложения, документооборот, отчётность и&nbsp;дизайн-системы, из&nbsp;которых собирают другие команды.</p>
+      <div class="hero__cta reveal">
+        <a class="btn" href="#work">Смотреть работы</a>
+        <ol class="method" aria-label="Как я работаю: роли, состояния, компоненты, релиз"><li>роли</li><li>состояния</li><li>компоненты</li><li>релиз</li></ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT I DO -->
+  <section class="section section--sand">
+    <div class="container">
+      <p class="eyebrow reveal">01 / Что я делаю</p>
+      <h2 class="section__title reveal">Три вещи, которые я делаю <em>лучше всего</em></h2>
+      <div class="pillars">
+        <article class="pillar reveal">
+          <span class="pillar__num">01</span>
+          <h3 class="pillar__title">Enterprise, B2B и B2E</h3>
+          <p>Роли, согласования, формы, документы. Сначала логика и крайние случаи, потом экраны: так сложная система становится рабочим инструментом.</p>
+        </article>
+        <article class="pillar reveal">
+          <span class="pillar__num">02</span>
+          <h3 class="pillar__title">Дизайн-системы</h3>
+          <p>Компоненты и правила, из которых следующий экран собирается без меня: UI-киты, стандарты отчётности, передача в разработку и подрядчикам.</p>
+        </article>
+        <article class="pillar reveal">
+          <span class="pillar__num">03</span>
+          <h3 class="pillar__title">AI в дизайн-процессе</h3>
+          <p>Пайплайны, которые снимают рутину. Скорость даёт AI, качество — структура промта, ревью и правила handoff.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="section section--paper" id="work">
+    <div class="container">
+      <p class="eyebrow reveal">02 / Работы</p>
+      <h2 class="section__title reveal">Проекты: от хаоса в 1С <em>до единой системы</em></h2>
+
+      <div class="tiles">
+        <a class="tile reveal" href="case-superapp.html" style="--bg:#14131a;--fg:#f5f5f9" aria-label="SuperApp: 10+ сервисов, одна система — 12 000+ сотрудников · 200+ объектов">
+          <span class="tile__in">
+            <span class="tile__face tile__front">
+              <span class="tile__top"><span class="tile__num">01</span><span class="tile__tag">Mobile · B2E</span></span>
+              <span class="tile__bottom"><span class="tile__title">SuperApp: 10+ сервисов, одна система</span><span class="tile__fact">Топ-5 застройщиков России · 12 000+ сотрудников</span></span>
+            </span>
+            <span class="tile__face tile__back"><img src="https://mir-s3-cdn-cf.behance.net/projects/808/1fbc66253221441.Y3JvcCwyODgwLDIyNTIsMCwyMjg.png" alt="Обложка кейса «SuperApp: 10+ сервисов, одна система»" loading="lazy"><span class="tile__cta">Открыть кейс →</span></span>
+          </span>
+        </a>
+        <a class="tile reveal" href="https://www.behance.net/gallery/252324641/Structa" target="_blank" rel="noopener" style="--bg:#e4e0f7;--fg:#14131a" aria-label="Structa: один портал вместо разрозненных систем — 4 роли · от заказа до аналитики">
+          <span class="tile__in">
+            <span class="tile__face tile__front">
+              <span class="tile__top"><span class="tile__num">02</span><span class="tile__tag">Enterprise B2B · портал</span></span>
+              <span class="tile__bottom"><span class="tile__title">Structa: один портал вместо разрозненных систем</span><span class="tile__fact">4 роли · от заказа до аналитики</span></span>
+            </span>
+            <span class="tile__face tile__back"><img src="https://mir-s3-cdn-cf.behance.net/projects/808/206932252324641.Y3JvcCwyODgwLDIyNTIsMCwxNzE.png" alt="Обложка кейса «Structa: один портал вместо разрозненных систем»" loading="lazy"><span class="tile__cta">Открыть кейс на Behance ↗</span></span>
+          </span>
+        </a>
+        <a class="tile reveal" href="https://www.behance.net/gallery/254729261/Power-BI-Report-Design-System" target="_blank" rel="noopener" style="--bg:#4b2fa8;--fg:#ffffff" aria-label="Power BI Report Design System — Стандарт утверждён ИТ-директором">
+          <span class="tile__in">
+            <span class="tile__face tile__front">
+              <span class="tile__top"><span class="tile__num">03</span><span class="tile__tag">Дизайн-система · аналитика</span></span>
+              <span class="tile__bottom"><span class="tile__title">Power BI Report Design System</span><span class="tile__fact">Стандарт утверждён ИТ-директором</span></span>
+            </span>
+            <span class="tile__face tile__back"><img src="https://mir-s3-cdn-cf.behance.net/projects/808/db3be2254729261.Y3JvcCw4MDgsNjMyLDAsMA.png" alt="Обложка кейса «Power BI Report Design System»" loading="lazy"><span class="tile__cta">Открыть кейс на Behance ↗</span></span>
+          </span>
+        </a>
+        <a class="tile reveal" href="https://www.behance.net/gallery/256150945/konstruktor-interaktivnyh-vizitov" target="_blank" rel="noopener" style="--bg:#e4e0f7;--fg:#14131a" aria-label="Конструктор интерактивных визитов — Основной инструмент цифрового контента в России и СНГ">
+          <span class="tile__in">
+            <span class="tile__face tile__front">
+              <span class="tile__top"><span class="tile__num">04</span><span class="tile__tag">Продуктовый инструмент · фарма</span></span>
+              <span class="tile__bottom"><span class="tile__title">Конструктор интерактивных визитов</span><span class="tile__fact">Основной инструмент цифрового контента в России и СНГ</span></span>
+            </span>
+            <span class="tile__face tile__back"><img src="https://mir-s3-cdn-cf.behance.net/projects/808/2ddf2f256150945.Y3JvcCwyNDg1LDE5NDQsMzg3LDA.png" alt="Обложка кейса «Конструктор интерактивных визитов»" loading="lazy"><span class="tile__cta">Открыть кейс на Behance ↗</span></span>
+          </span>
+        </a>
+        <a class="tile reveal" href="https://www.behance.net/gallery/252459775/AI-pajplajn-dlja-vizualnyh-tz-po-formam-1s" target="_blank" rel="noopener" style="--bg:#241a6b;--fg:#f5f5f9" aria-label="Prompt is not enough: AI-процесс для ТЗ по формам 1С — Черновик ТЗ: полдня → 2 минуты">
+          <span class="tile__in">
+            <span class="tile__face tile__front">
+              <span class="tile__top"><span class="tile__num">05</span><span class="tile__tag">AI · Enterprise · 1С</span></span>
+              <span class="tile__bottom"><span class="tile__title">Prompt is not enough: AI-процесс для ТЗ по формам 1С</span><span class="tile__fact">Черновик ТЗ: полдня → 2 минуты</span></span>
+            </span>
+            <span class="tile__face tile__back"><img src="https://mir-s3-cdn-cf.behance.net/projects/808/6618d4252459775.Y3JvcCwxMDAxLDc4MywwLDA.png" alt="Обложка кейса «Prompt is not enough: AI-процесс для ТЗ по формам 1С»" loading="lazy"><span class="tile__cta">Открыть кейс на Behance ↗</span></span>
+          </span>
+        </a>
+        <a class="tile reveal" href="https://www.behance.net/gallery/252810037/chaty-ot-perepiski-k-rabochim-dejstvijam" target="_blank" rel="noopener" style="--bg:#bdb6e6;--fg:#14131a" aria-label="Чаты: от переписки к рабочим действиям — Сообщение → рабочее действие">
+          <span class="tile__in">
+            <span class="tile__face tile__front">
+              <span class="tile__top"><span class="tile__num">06</span><span class="tile__tag">Mobile · Messaging</span></span>
+              <span class="tile__bottom"><span class="tile__title">Чаты: от переписки к рабочим действиям</span><span class="tile__fact">Сообщение → рабочее действие</span></span>
+            </span>
+            <span class="tile__face tile__back"><img src="https://mir-s3-cdn-cf.behance.net/projects/808/a82281252810037.Y3JvcCwzMDY4LDI0MDAsNjgsMA.png" alt="Обложка кейса «Чаты: от переписки к рабочим действиям»" loading="lazy"><span class="tile__cta">Открыть кейс на Behance ↗</span></span>
+          </span>
+        </a>
+        <a class="tile reveal" href="https://www.behance.net/gallery/253586225/master-klassy-ot-kataloga-k-oplate" target="_blank" rel="noopener" style="--bg:#6b5cff;--fg:#ffffff" aria-label="Мастер-классы: от каталога к оплате — Платформа с аудиторией 12+ млн пользователей в месяц">
+          <span class="tile__in">
+            <span class="tile__face tile__front">
+              <span class="tile__top"><span class="tile__num">07</span><span class="tile__tag">B2C · e-commerce · медиа</span></span>
+              <span class="tile__bottom"><span class="tile__title">Мастер-классы: от каталога к оплате</span><span class="tile__fact">Платформа с аудиторией 12+ млн пользователей в месяц</span></span>
+            </span>
+            <span class="tile__face tile__back"><img src="https://mir-s3-cdn-cf.behance.net/projects/808/531ca8253586225.Y3JvcCwxMDk2LDg1NywzNDQsODE.png" alt="Обложка кейса «Мастер-классы: от каталога к оплате»" loading="lazy"><span class="tile__cta">Открыть кейс на Behance ↗</span></span>
+          </span>
+        </a>
+        <a class="tile reveal" href="https://www.behance.net/gallery/236096103/Corporate-Portal-Enterprise-Task-Management-System" target="_blank" rel="noopener" style="--bg:#e4e0f7;--fg:#14131a" aria-label="Платформа отпусков — Редизайн ключевого раздела портала">
+          <span class="tile__in">
+            <span class="tile__face tile__front">
+              <span class="tile__top"><span class="tile__num">08</span><span class="tile__tag">Корпоративный портал</span></span>
+              <span class="tile__bottom"><span class="tile__title">Платформа отпусков</span><span class="tile__fact">Редизайн ключевого раздела портала</span></span>
+            </span>
+            <span class="tile__face tile__back"><img src="https://mir-s3-cdn-cf.behance.net/projects/808/d8642d236096103.Y3JvcCwzMDY4LDI0MDAsNjgsMA.png" alt="Обложка кейса «Платформа отпусков»" loading="lazy"><span class="tile__cta">Открыть кейс на Behance ↗</span></span>
+          </span>
+        </a>
+        <a class="tile reveal" href="https://www.behance.net/gallery/236096815/Master-Construction-Corporate-Website" target="_blank" rel="noopener" style="--bg:#14131a;--fg:#f5f5f9" aria-label="Master Construction — Сайт строительной компании с международными амбициями">
+          <span class="tile__in">
+            <span class="tile__face tile__front">
+              <span class="tile__top"><span class="tile__num">09</span><span class="tile__tag">Web · корпоративный сайт</span></span>
+              <span class="tile__bottom"><span class="tile__title">Master Construction</span><span class="tile__fact">Сайт строительной компании с международными амбициями</span></span>
+            </span>
+            <span class="tile__face tile__back"><img src="https://mir-s3-cdn-cf.behance.net/projects/808/3a6353236096815.Y3JvcCw5MjIsNzIxLDIxNiw1NA.png" alt="Обложка кейса «Master Construction»" loading="lazy"><span class="tile__cta">Открыть кейс на Behance ↗</span></span>
+          </span>
+        </a>
+      </div>
+      <div class="tiles__more reveal"><span>Наведите на проект — он перевернётся и покажет обложку</span><span class="tiles__links"><a class="also__all also__all--2" href="https://www.behance.net/Zhanna" target="_blank" rel="noopener">Все работы на Behance ↗</a></span></div>
+        </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section section--sand" id="experience">
+    <div class="container">
+      <p class="eyebrow reveal">03 / Опыт</p>
+      <h2 class="section__title reveal">Где я <em>это делала</em></h2>
+
+      <ol class="jobs">
+        <li class="job reveal">
+          <span class="job__years">2022 — 2026</span>
+          <div>
+            <h3 class="job__role">Senior Product Designer / Design Lead</h3>
+            <p class="job__company">МСУ-1 · строительный холдинг, топ-5 застройщиков России · B2E и B2B</p>
+          </div>
+          <p class="job__text">Единственный источник дизайна в компании: мобильное приложение, корпоративный портал, документооборот и согласования, 1С, BI, сайты. AI-пайплайн для ТЗ по формам 1С: 7 сценариев, обязательная проверка человеком.</p>
+        </li>
+        <li class="job reveal">
+          <span class="job__years">2021 — 2022</span>
+          <div>
+            <h3 class="job__role">Senior Product Designer</h3>
+            <p class="job__company">Едим Дома · B2C, медиа, e-commerce</p>
+          </div>
+          <p class="job__text">Продуктовые функции для аудитории 12+ млн уникальных пользователей в месяц. E-commerce-воронка кулинарных курсов с нуля до релиза: карточка → корзина → оформление → оплата.</p>
+        </li>
+        <li class="job reveal">
+          <span class="job__years">2018 — 2021</span>
+          <div>
+            <h3 class="job__role">UX/UI Designer / Product Designer</h3>
+            <p class="job__company">Gedeon Richter · фарма, B2E в России и СНГ</p>
+          </div>
+          <p class="job__text">Корпоративное B2E-приложение с нуля: сценарии, CJM, UI-кит, контроль реализации. Внедрено на 100% сотрудников менее чем за 2 месяца.</p>
+        </li>
+      </ol>
+
+      <div class="basis reveal">
+        <div>
+          <p class="basis__label">Образование</p>
+          <p>МГУ им. Ломоносова — дизайн средств массовой коммуникации; позже преподавала там же. Британская высшая школа дизайна — дизайн в интерактивной среде.</p>
+        </div>
+        <div>
+          <p class="basis__label">Награды</p>
+          <p>D&amp;AD · Typomania · POPAI</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <p class="eyebrow eyebrow--light reveal">04 / Контакты</p>
+      <h2 class="contact__title reveal">Есть сложный продукт? <em>Давайте разберём</em></h2>
+      <p class="contact__lead reveal">Открыта к ролям Senior / Lead Product Designer и Head of Design. Удалённо.</p>
+      <a class="contact__mail reveal" href="mailto:zh.nosova@gmail.com">zh.nosova@gmail.com</a>
+      <ul class="contact__links reveal">
+        <li><a href="https://t.me/zhanna8n" target="_blank" rel="noopener">Telegram ↗</a></li>
+        <li><a href="https://hh.ru/resume/bdc3959fff0ea1ea430039ed1f524f33356e49" target="_blank" rel="noopener">Резюме на hh.ru ↗</a></li>
+        <li><a href="https://www.behance.net/Zhanna" target="_blank" rel="noopener">Behance ↗</a></li>
+      </ul>
+    </div>
+    <footer class="footer">
+      <p>© 2026 Жанна Носова</p>
+    </footer>
+  </section>
+</main>
+
+<script>
+  // Шапка: прозрачная над тёмным первым экраном, светлая после прокрутки
+  const header = document.querySelector('.site-header');
+  const hero = document.querySelector('.hero');
+  const onScroll = () => header.classList.toggle('is-solid', window.scrollY > hero.offsetHeight - 80);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Мягкое появление блоков при прокрутке
+  document.documentElement.classList.add('js');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal').forEach((el, i) => { el.style.transitionDelay = (el.closest('.hero') ? i * 90 : 0) + 'ms'; io.observe(el); });
+  // Живой фон: WebGL-дымка в тонах Tiffany. Мышь мягко «размывает» её волнами.
+  (() => {
+    const heroEl = document.querySelector('.hero');
+    const canvas = heroEl && heroEl.querySelector('.hero__canvas');
+    if (!canvas) return;
+    const gl = canvas.getContext('webgl', { premultipliedAlpha: false, antialias: false });
+    if (!gl) return; // без WebGL остаётся CSS-свечение
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const vs = 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
+    const fs = `
+      precision mediump float;
+      uniform vec2 uRes; uniform float uTime; uniform vec2 uMouse; uniform float uHover; uniform float uGain;
+      float h(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+      float n(vec2 p){ vec2 i = floor(p), f = fract(p); f = f*f*(3.-2.*f);
+        return mix(mix(h(i), h(i+vec2(1.,0.)), f.x), mix(h(i+vec2(0.,1.)), h(i+vec2(1.,1.)), f.x), f.y); }
+      float fbm(vec2 p){ float v = 0., a = .5; for (int i = 0; i < 5; i++){ v += a*n(p); p = p*2.02 + 17.; a *= .5; } return v; }
+      uniform float uCell;
+      vec4 field(vec2 uv){
+        float asp = uRes.x / uRes.y;
+        vec2 p = (uv - .5) * vec2(asp, 1.) * 1.2;
+        vec2 m = (uMouse - .5) * vec2(asp, 1.) * 1.2;
+        float t = uTime * .035;
+        float d = length(p - m);
+        float infl = uHover * exp(-d*d*1.1);
+        p += (m * .06);
+        vec2 q = vec2(fbm(p + t), fbm(p + vec2(5.2, 1.3) - t));
+        vec2 r = vec2(fbm(p + 3.*q + vec2(1.7, 9.2) + .15*t + infl*(p - m)*1.6),
+                      fbm(p + 3.*q + vec2(8.3, 2.8) - .12*t - infl*vec2(-(p-m).y, (p-m).x)*1.4));
+        float f = fbm(p + 3.*r);
+        vec3 indigo = vec3(.231, .184, .600);
+        vec3 violet = vec3(.420, .361, 1.0);    // #6B5CFF
+        vec3 lav    = vec3(.741, .714, .902);   // #BDB6E6
+        vec3 c = mix(indigo, violet, smoothstep(.25, .85, f));
+        c = mix(c, lav, smoothstep(.62, .95, f) * .55);
+        vec2 e = (uv - vec2(.55, .5)) * vec2(1.25, 1.55);
+        float mask = smoothstep(1.05, .05, length(e));
+        float glow = mask * (.45 + .55*f) * uGain * (1. + infl*.6);
+        return vec4(c, clamp(glow, 0., 1.));
+      }
+      void main(){
+        // полутоновая точечная сетка: поле считается в центре клетки, размер точки = яркость
+        vec2 cell = floor(gl_FragCoord.xy / uCell);
+        vec2 ctr = (cell + .5) * uCell;
+        vec4 F = field(ctr / uRes);
+        vec2 lp = (gl_FragCoord.xy - ctr) / uCell;           // -0.5..0.5 внутри клетки
+        float g = smoothstep(.10, .95, F.a);
+        float rad = .5 * pow(g, 1.25) * 1.1;
+        float dist = length(lp);
+        float on = step(dist, rad) * step(.02, g);
+        vec3 base = vec3(.078, .075, .102);
+        gl_FragColor = vec4(mix(base, F.rgb, on * (.6 + .4*g)), 1.);
+      }`;
+    const sh = (type, src) => { const o = gl.createShader(type); gl.shaderSource(o, src); gl.compileShader(o); return gl.getShaderParameter(o, gl.COMPILE_STATUS) ? o : null; };
+    const v = sh(gl.VERTEX_SHADER, vs), f = sh(gl.FRAGMENT_SHADER, fs);
+    if (!v || !f) return;
+    const pr = gl.createProgram(); gl.attachShader(pr, v); gl.attachShader(pr, f); gl.linkProgram(pr);
+    if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return;
+    gl.useProgram(pr);
+    const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(pr, 'a'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    const U = (k) => gl.getUniformLocation(pr, k);
+    const uCell = U('uCell'), uRes = U('uRes'), uTime = U('uTime'), uMouse = U('uMouse'), uHover = U('uHover'), uGain = U('uGain');
+
+    const GAIN = 0.78;    // яркость дымки: 0.6 — тише, 0.9 — ярче
+    const EASE = 0.035;   // плавность реакции на мышь: меньше — тягучее
+    const SCALE = 1;      // точечная сетка рисуется в полном разрешении
+    const CELL = 10;      // шаг точки, px: 7 — мельче и плотнее, 12 — крупнее и графичнее
+
+    const resize = () => {
+      const r = heroEl.getBoundingClientRect();
+      canvas.width = Math.max(2, Math.round(r.width * SCALE));
+      canvas.height = Math.max(2, Math.round(r.height * SCALE));
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    };
+    resize(); window.addEventListener('resize', resize);
+
+    let mx = .5, my = .5, tmx = .5, tmy = .5, hov = 0, thov = 0;
+    heroEl.addEventListener('pointermove', (e) => {
+      const r = heroEl.getBoundingClientRect();
+      tmx = (e.clientX - r.left) / r.width; tmy = 1 - (e.clientY - r.top) / r.height; thov = 1;
+    });
+    heroEl.addEventListener('pointerleave', () => { thov = 0; });
+
+    let visible = true;
+    new IntersectionObserver((en) => { visible = en[0].isIntersecting; }).observe(heroEl);
+    heroEl.classList.add('has-canvas');
+
+    const t0 = performance.now();
+    const frame = (now) => {
+      if (visible) {
+        mx += (tmx - mx) * EASE; my += (tmy - my) * EASE; hov += (thov - hov) * EASE;
+        gl.uniform2f(uRes, canvas.width, canvas.height); gl.uniform1f(uCell, CELL);
+        gl.uniform1f(uTime, still ? 20 : (now - t0) / 1000);
+        gl.uniform2f(uMouse, mx, my); gl.uniform1f(uHover, still ? 0 : hov); gl.uniform1f(uGain, GAIN);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
+      if (!still) requestAnimationFrame(frame);
+    };
+    requestAnimationFrame(frame);
+  })();
+</script>
+
+
+<script>
+/* ===== Инспектор токенов: как Inspect в Figma, только на живом сайте =====
+   MAP — какие элементы раскладываются и как называются компоненты.
+   TOKENS — имена цветов из палитры сайта. Выключен на touch. */
+(() => {
+  if (!matchMedia('(pointer: fine)').matches) return;
+  const MAP = [
+    ['.t1', 'H1 / Primary'], ['.t2', 'H1 / Accent'], ['.hero__lead', 'Text / Lead'], ['.hero .eyebrow', 'Eyebrow / Role'],
+    ['.btn', 'Button / Primary'], ['.logo', 'Logo'], ['.nav a', 'Nav / Link'], ['.avail', 'Status / Available'],
+    ['.section__title', 'H2 / Section'], ['.contact__title', 'H2 / Contact'], ['.eyebrow', 'Eyebrow'],
+    ['.pillar__num', 'Pillar / Index'], ['.pillar__title', 'Pillar / Title'], ['.pillar', 'Card / Pillar'],
+    ['.tile__title', 'Tile / Title'], ['.tile__fact', 'Tile / Fact'], ['.tile__tag', 'Tile / Tag'], ['.tile__num', 'Tile / Index'], ['.tile', 'Card / Project'], ['.tiles__more', 'Hint'], ['.card__pass', 'Meta / Passport'], ['.card__title', 'Card / Title'], ['.card__result', 'Card / Result'], ['.card__link', 'Link / Arrow'],
+    ['.card__media', 'Card / Media'], ['.card', 'Card / Case'],
+    ['.job__years', 'Job / Period'], ['.job__role', 'Job / Role'], ['.job__company', 'Job / Company'], ['.job__text', 'Job / Text'], ['.job', 'List / Job'],
+    ['.also__label', 'Label'], ['.also__list li', 'List / Item'], ['.also__links a', 'Link'], ['.also', 'Block / More'],
+    ['.basis__label', 'Label'], ['.contact__lead', 'Text / Lead'], ['.contact__mail', 'Link / Mail'], ['.contact__links a', 'Link / Contact'],
+    ['.section p', 'Text / Body'], ['.footer', 'Footer']
+  ];
+  const TOKENS = { 'f5f5f2': 'paper', '14131a': 'ink', 'ecebf1': 'sand', '6b5cff': 'accent', '4b2fa8': 'violet/deep', 'bdb6e6': 'lavender', 'c7c2d8': 'lavender/muted', 'ffffff': 'white', '8f86ff': 'accent/soft' };
+  const hex = c => { const m = c.match(/[\d.]+/g); if (!m) return null; const [r, g, b, a = 1] = m.map(Number); if (a === 0) return null;
+    const h = [r, g, b].map(v => Math.round(v).toString(16).padStart(2, '0')).join(''); return { h, a, name: (TOKENS[h] || '#' + h) + (a < 1 ? ' / ' + Math.round(a * 100) + '%' : '') }; };
+  const px = v => Math.round(parseFloat(v));
+  const ix = document.createElement('div'); ix.className = 'ix'; ix.setAttribute('aria-hidden', 'true');
+  ix.innerHTML = '<div class="ix__box"></div><div class="ix__content"></div><div class="ix__name"></div><div class="ix__size"></div><div class="ix__tokens"></div>';
+  document.body.appendChild(ix);
+  const [box, content, name, size, toks] = ix.children;
+  let cur = null, timer = null;
+  const find = el => { for (let n = el; n && n !== document.body; n = n.parentElement) for (const [sel, label] of MAP) if (n.matches(sel)) return [n, label]; return null; };
+  function tokens(el) {
+    const cs = getComputedStyle(el), out = [];
+    const fam = cs.fontFamily.split(',')[0].replace(/"/g, ''), fs = px(cs.fontSize), lh = cs.lineHeight === 'normal' ? '—' : px(cs.lineHeight);
+    const hasText = [...el.childNodes].some(n => n.nodeType === 3 && n.textContent.trim()) || el.matches('.t1,.t2,h1,h2,h3,p,a,li');
+    if (hasText) {
+      out.push(['font', `${fam} ${cs.fontWeight}${cs.fontStyle === 'italic' ? ' italic' : ''}`]);
+      out.push(['size', `${fs} / ${lh}`]);
+      const ls = parseFloat(cs.letterSpacing); if (ls) out.push(['tracking', `${Math.round(ls / parseFloat(cs.fontSize) * 1000) / 10}%`]);
+      if (cs.textTransform === 'uppercase') out.push(['case', 'upper']);
+      const c = hex(cs.color); if (c) out.push(['color', c.name, '#' + c.h]);
+    }
+    const bg = hex(cs.backgroundColor); if (bg) out.push(['fill', bg.name, '#' + bg.h]);
+    const bw = parseFloat(cs.borderTopWidth); if (bw) { const bc = hex(cs.borderTopColor); if (bc) out.push(['stroke', `${bw} · ${bc.name}`, '#' + bc.h]); }
+    const p = ['Top', 'Right', 'Bottom', 'Left'].map(k => px(cs['padding' + k]));
+    if (p.some(Boolean)) out.push(['padding', p[0] === p[2] && p[1] === p[3] ? `${p[0]} · ${p[1]}` : p.join(' · ')]);
+    if (cs.display.includes('grid') || cs.display.includes('flex')) { const g = cs.rowGap !== 'normal' ? px(cs.rowGap) : 0, cg = cs.columnGap !== 'normal' ? px(cs.columnGap) : 0; if (g || cg) out.push(['gap', g === cg ? `${g}` : `${g} · ${cg}`]); }
+    const r = px(cs.borderTopLeftRadius); if (r) out.push(['radius', r]);
+    return out;
+  }
+  function place() {
+    if (!cur) return;
+    const el = cur[0], r = el.getBoundingClientRect(), cs = getComputedStyle(el);
+    const pl = parseFloat(cs.paddingLeft), pr = parseFloat(cs.paddingRight), pt = parseFloat(cs.paddingTop), pb = parseFloat(cs.paddingBottom);
+    Object.assign(box.style, { left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px' });
+    const hasPad = pl + pr + pt + pb > 0; content.style.display = hasPad ? 'block' : 'none';
+    if (hasPad) Object.assign(content.style, { left: r.left + pl + 'px', top: r.top + pt + 'px', width: Math.max(0, r.width - pl - pr) + 'px', height: Math.max(0, r.height - pt - pb) + 'px' });
+    name.style.left = r.left + 'px'; name.style.top = Math.max(4, r.top - 20) + 'px';
+    size.textContent = `${Math.round(r.width)} × ${Math.round(r.height)}`;
+    size.style.left = r.left + 'px'; size.style.top = r.bottom + 4 + 'px';
+    const tw = toks.offsetWidth || 220, right = r.right + 14 + tw < innerWidth - 8;
+    toks.style.left = (right ? r.right + 14 : Math.max(8, Math.min(r.left, innerWidth - tw - 8))) + 'px';
+    toks.style.top = (right ? r.top : r.bottom + 24) + 'px';
+  }
+  function show(hit) {
+    cur = hit; name.textContent = hit[1];
+    toks.innerHTML = tokens(hit[0]).map(([k, v, sw], i) => `<div class="ix__tok" style="transition-delay:${i * 45}ms"><i>${k}</i>${sw ? `<s style="background:${sw}"></s>` : ''}${v}</div>`).join('');
+    ix.classList.remove('on'); void ix.offsetWidth; place(); ix.classList.add('on');
+    if (Date.now() - (window.__ixPing || 0) > 3500) { window.__ixPing = Date.now(); btns.forEach(b => { b.classList.remove('is-pinged'); void b.offsetWidth; b.classList.add('is-pinged'); }); }
+  }
+  function hide() { cur = null; ix.classList.remove('on'); }
+  let enabled = true;
+  try { if (localStorage.getItem('ix') === '0') enabled = false; } catch (e) {}
+  const btns = [...document.querySelectorAll('.ix-toggle')];
+  function setEnabled(v) {
+    enabled = v; document.documentElement.classList.toggle('ix-enabled', v);
+    btns.forEach(b => { b.setAttribute('aria-pressed', String(v)); b.title = v ? 'Скрыть токены' : 'Показать токены';
+      b.querySelector('.ix-toggle__label').textContent = v ? 'Скрыть токены' : 'Показать токены';
+      b.dataset.tip = v ? 'Наведите на любой элемент — он разложится на шрифт, цвет и отступы. Нажмите, чтобы скрыть.' : 'Включите — и любой элемент сайта разложится на токены.'; });
+    if (!v) hide();
+    try { localStorage.setItem('ix', v ? '1' : '0'); } catch (e) {}
+  }
+  btns.forEach(b => b.addEventListener('click', () => setEnabled(!enabled)));
+  setEnabled(enabled);
+  document.addEventListener('pointerover', e => {
+    if (!enabled || e.target.closest('.ix-toggle, .sh-dock, .sh-panel')) { clearTimeout(timer); if (cur) timer = setTimeout(hide, 60); return; }
+    const hit = find(e.target); clearTimeout(timer);
+    if (!hit) { timer = setTimeout(hide, 60); return; }
+    if (cur && cur[0] === hit[0]) return;
+    timer = setTimeout(() => show(hit), cur ? 40 : 140);
+  });
+  document.documentElement.addEventListener('pointerleave', hide);
+  addEventListener('scroll', place, { passive: true }); addEventListener('resize', place);
+})();
+</script>
+
+<script>
+/* Плитки: на телефоне первое касание переворачивает, второе открывает кейс */
+(() => {
+  if (!matchMedia('(hover: none)').matches) return;
+  document.querySelectorAll('.tile').forEach(t => t.addEventListener('click', e => {
+    if (t.classList.contains('is-flipped')) return;
+    e.preventDefault();
+    document.querySelectorAll('.tile.is-flipped').forEach(o => o.classList.remove('is-flipped'));
+    t.classList.add('is-flipped');
+  }));
+})();
+</script>
+<!-- ===== Шанти: ассистент портфолио (сценарный, без нейросети) ===== -->
+<style>
+.sh-dock { position: fixed; right: 18px; bottom: 14px; z-index: 95; display: flex; align-items: flex-end; gap: 10px; pointer-events: none; }
+.sh-dog { pointer-events: auto; position: relative; border: 0; padding: 0; background: none; cursor: pointer; width: 140px; height: 110px; transition: transform .35s cubic-bezier(.2,.7,.2,1); animation: sh-breathe 3.2s ease-in-out infinite; transform-origin: 50% 100%; }
+.sh-dog img { image-rendering: pixelated; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: 50% 100%; filter: drop-shadow(0 6px 10px rgba(20,19,26,.18)); }
+.sh-dog:hover, .sh-dog:focus-visible { transform: translateY(-3px); animation-play-state: paused; }
+.sh-dog.is-sleep { animation-duration: 4.5s; }
+.sh-zzz { position: absolute; right: 14px; top: 8px; font: 600 13px/1 var(--mono); color: #bdb6e6; opacity: 0; transition: opacity .4s; pointer-events: none; }
+.sh-dog.is-sleep .sh-zzz { opacity: 1; animation: sh-z 2.4s ease-in-out infinite; }
+@keyframes sh-z { 0%,100% { transform: translateY(0); opacity: .4; } 50% { transform: translateY(-6px); opacity: 1; } }
+.sh-chips.is-busy .sh-chip { opacity: .45; pointer-events: none; }
+.sh-dog:focus-visible { outline: 2px solid #6b5cff; outline-offset: 4px; }
+@keyframes sh-breathe { 0%,100% { transform: scaleY(1); } 50% { transform: scaleY(.975); } }
+.sh-tease { pointer-events: auto; position: relative; max-width: 220px; margin-bottom: 70px; padding: 10px 30px 10px 12px; background: #14131a; color: #f5f5f2; font: 400 12px/1.45 var(--mono); border: 1px solid rgba(143,134,255,.4); opacity: 0; transform: translateY(6px); transition: opacity .3s, transform .3s; }
+.sh-tease.is-on { opacity: 1; transform: none; }
+.sh-tease::after { content: ""; position: absolute; right: -7px; bottom: 14px; width: 12px; height: 12px; background: #14131a; border-right: 1px solid rgba(143,134,255,.4); border-top: 1px solid rgba(143,134,255,.4); transform: rotate(45deg); }
+.sh-tease button { position: absolute; top: 4px; right: 6px; border: 0; background: none; color: #bdb6e6; font: 14px/1 var(--mono); cursor: pointer; }
+.sh-panel { position: fixed; right: 18px; bottom: 134px; z-index: 96; width: min(372px, calc(100vw - 24px)); max-height: min(560px, calc(100vh - 170px)); display: flex; flex-direction: column; background: #14131a; color: #f5f5f2; border: 1px solid rgba(143,134,255,.35); box-shadow: 0 24px 60px rgba(20,19,26,.35); opacity: 0; transform: translateY(10px) scale(.98); transform-origin: 100% 100%; pointer-events: none; transition: opacity .25s, transform .25s; }
+.sh-panel.is-open { opacity: 1; transform: none; pointer-events: auto; }
+.sh-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 14px 16px 12px; border-bottom: 1px solid rgba(245,245,242,.08); }
+.sh-head b { display: block; font: 600 15px/1.2 var(--sans); letter-spacing: -.01em; }
+.sh-head span { display: block; margin-top: 4px; font: 400 10.5px/1.3 var(--mono); color: rgba(245,245,242,.5); letter-spacing: .02em; }
+.sh-close { border: 0; background: none; color: #bdb6e6; font: 18px/1 var(--mono); cursor: pointer; padding: 2px 4px; }
+.sh-log { flex: 1; overflow-y: auto; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; scroll-behavior: smooth; }
+.sh-msg { max-width: 88%; padding: 10px 12px; font: 400 14px/1.5 var(--sans); white-space: pre-line; }
+.sh-msg--bot { align-self: flex-start; background: #221e36; border: 1px solid rgba(143,134,255,.18); }
+.sh-msg--me { align-self: flex-end; background: #6b5cff; color: #fff; }
+.sh-msg a { color: #bdb6e6; text-underline-offset: 3px; }
+.sh-msg .sh-links { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 8px; font: 500 11px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+.sh-msg .sh-links a { color: #bdb6e6; text-decoration: none; }
+.sh-typing { display: inline-flex; gap: 4px; }
+.sh-typing i { width: 6px; height: 6px; background: #bdb6e6; animation: sh-dot 1s infinite; }
+.sh-typing i:nth-child(2) { animation-delay: .15s; } .sh-typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes sh-dot { 0%,100% { opacity: .25; } 50% { opacity: 1; } }
+.sh-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 16px 16px; border-top: 1px solid rgba(245,245,242,.08); }
+.sh-chip { border: 1px solid rgba(143,134,255,.45); background: none; color: #e9e7f5; font: 400 12px/1.2 var(--sans); padding: 7px 10px; cursor: pointer; transition: background .2s, border-color .2s; }
+.sh-chip:hover { background: rgba(107,92,255,.18); border-color: #bdb6e6; }
+.sh-chip.is-used { opacity: .5; }
+@media (max-width: 560px) {
+  .sh-dog { width: 104px; height: 82px; }
+  .sh-panel { right: 12px; bottom: 104px; }
+  .sh-tease { margin-bottom: 50px; max-width: 180px; }
+}
+@media (prefers-reduced-motion: reduce) { .sh-dog { animation: none; } .sh-panel, .sh-tease, .sh-dog img { transition: none; } }
+
+/* v2: Шанти на «горизонте» в правом поле, крупнее, с воздухом; при диалоге голова перекрывает окно */
+:root { --sh-w: clamp(124px, 8.6vw, 210px); --sh-h: calc(var(--sh-w) * 352 / 400); --sh-r: max(28px, calc((100vw - 1120px) / 2 - var(--sh-w) - 40px)); --sh-b: clamp(28px, 7vh, 76px); }
+.sh-dock { right: var(--sh-r); bottom: var(--sh-b); }
+.sh-dog { width: var(--sh-w); height: var(--sh-h); }
+.sh-ledge { position: absolute; left: -22%; right: -22%; bottom: 0; height: 1px; background: linear-gradient(90deg, rgba(143,134,255,0), rgba(143,134,255,.7) 22%, rgba(143,134,255,.7) 78%, rgba(143,134,255,0)); pointer-events: none; }
+.sh-label { position: absolute; left: 0; right: 0; top: calc(100% + 9px); text-align: center; font: 500 10px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #bdb6e6; opacity: .8; pointer-events: none; white-space: nowrap; }
+.sh-dog:hover .sh-label { opacity: 1; }
+.sh-tease { margin-bottom: calc(var(--sh-h) * .62); }
+.sh-panel { right: calc(var(--sh-r) - 12px); bottom: calc(var(--sh-b) + var(--sh-h) * .7); z-index: 94; }
+.sh-panel .sh-chips { padding-bottom: calc(var(--sh-h) * .3 + 14px); }
+.sh-dock { z-index: 97; }
+@media (max-width: 560px) { :root { --sh-w: 104px; --sh-r: 14px; --sh-b: 22px; } .sh-panel { right: 12px; } .sh-label { display: none; } }
+
+/* v3: по умолчанию в углу, собаку можно перетащить мышкой; окно диалога следует за ней */
+:root { --sh-r: 28px; --sh-b: 28px; }
+.sh-ledge { display: none; }
+.sh-dog { cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-user-drag: none; }
+.sh-dog img, .sh-dog span { pointer-events: none; -webkit-user-drag: none; user-select: none; }
+.sh-dock.is-drag .sh-dog { cursor: grabbing; transform: scale(1.06) rotate(-4deg); animation: none; }
+.sh-dock.is-drag .sh-tease { opacity: 0; }
+.sh-dock.is-free { right: auto; bottom: auto; }
+.sh-panel.is-free { right: auto; bottom: auto; transform-origin: 50% 100%; }
+@media (max-width: 560px) { :root { --sh-r: 14px; --sh-b: 16px; } }
+
+/* глаза следят за курсором: отдельный слой, шаг = 1 пиксель спрайта */
+.sh-dog img.sh-eyel { display: none; filter: none; transition: transform .14s steps(1, end); }
+.sh-dog.has-eyes img.sh-eyel { display: block; }
+:root { --sh-w: 150px; }
+@media (min-width: 1800px) { :root { --sh-w: 200px; } }
+@media (max-width: 560px) { :root { --sh-w: 100px; } }
+</style>
+<div class="sh-dock" aria-live="polite">
+  <div class="sh-tease" role="status"><span>Woof. Я Шанти — могу коротко рассказать про Жанну.</span><button type="button" aria-label="Скрыть">×</button></div>
+  <button class="sh-dog" type="button" aria-label="Открыть диалог с Шанти — ассистентом портфолио" aria-expanded="false" aria-controls="sh-panel">
+    <img src="assets/shanti-v4/idle-snow.png" alt="" width="400" height="352" draggable="false">
+    <img class="sh-eyel" src="assets/shanti-v4/eyes-idle-snow.png" alt="" width="400" height="352" draggable="false" aria-hidden="true">
+    <span class="sh-zzz" aria-hidden="true">z z</span>
+    <span class="sh-ledge" aria-hidden="true"></span><span class="sh-label" aria-hidden="true">спросить Шанти</span>
+  </button>
+</div>
+<section class="sh-panel" id="sh-panel" role="dialog" aria-label="Шанти — ассистент портфолио">
+  <div class="sh-head"><div><b>Шанти</b><span>ассистент портфолио · отвечает по сценарию, без нейросети</span></div><button class="sh-close" type="button" aria-label="Закрыть">×</button></div>
+  <div class="sh-log"></div>
+  <div class="sh-chips"></div>
+</section>
+<script>
+(() => {
+  const BE = 'https://www.behance.net/gallery/';
+  const Q = [
+    { q: 'Кого вы ищете?', roles: true },
+    { q: 'Чем она сильна', a: 'Сложные рабочие системы: роли, согласования, документы, 1С. Например, SuperApp для 12 000+ сотрудников — с нуля и в одиночку.', l: [['Кейс SuperApp', 'case-superapp.html']] },
+    { q: 'Дизайн-системы', a: 'UI-кит SuperApp на 950+ компонентов и стандарт отчётности Power BI, утверждённый ИТ-директором.', l: [['Power BI на Behance', BE + '254729261/Power-BI-Report-Design-System']] },
+    { q: 'AI в работе', a: 'Черновик ТЗ по формам 1С: было полдня, стало 2 минуты. AI пишет черновик, решение принимает человек.', l: [['Кейс на Behance', BE + '252459775/AI-pajplajn-dlja-vizualnyh-tz-po-formam-1s']] },
+    { q: 'Как она работает', a: 'Сначала логика, роли и крайние случаи, потом экраны. Пустые состояния и ошибки — часть макета, а не «потом».' },
+    { q: 'Сменить тему', skin: true },
+    { q: 'Ты настоящая?', a: 'Да. В жизни я белоснежный ретривер. Здесь — в цветах бренда.' },
+    { q: 'Как связаться', a: 'Открыта к ролям Senior / Lead / Head of Design, удалённо.', l: [['Почта', 'mailto:zh.nosova@gmail.com'], ['Telegram', 'https://t.me/zhanna8n']] }
+  ];
+  const CONTACT = [['Написать', 'mailto:zh.nosova@gmail.com'], ['Telegram', 'https://t.me/zhanna8n']];
+  const ROLES = [
+    { q: 'Product Designer', a: 'End-to-end от сценария до релиза: мобильный B2E SuperApp для 12 000+ сотрудников и e-commerce-воронка мастер-классов для аудитории 12+ млн в месяц. Начните с SuperApp.', l: [['Кейс SuperApp', 'case-superapp.html']].concat(CONTACT) },
+    { q: 'Lead / Head of Design', a: 'Единственный дизайнер строительного холдинга из топ-5: SuperApp, порталы, сайт и документооборот. Ставила задачи и принимала работу подрядчиков, согласовывала стандарты с ИТ-директором. Начните с SuperApp.', l: [['Кейс SuperApp', 'case-superapp.html']].concat(CONTACT) },
+    { q: 'Design Systems', a: 'UI-кит на 950+ компонентов, по которому работали команда и подрядчики, и стандарт отчётности Power BI для всех команд компании. Начните с Power BI.', l: [['Power BI на Behance', BE + '254729261/Power-BI-Report-Design-System']].concat(CONTACT) }
+  ];
+  const SKINS = ['snow', 'lavender', 'violet'];
+  const SKIN_TXT = { snow: 'Тема: белоснежная.', lavender: 'Тема: лавандовая.', violet: 'Тема: фиолетовая.' };
+  const dock = document.querySelector('.sh-dock'), dog = dock.querySelector('.sh-dog'), tease = dock.querySelector('.sh-tease');
+  const panel = document.getElementById('sh-panel'), log = panel.querySelector('.sh-log'), chips = panel.querySelector('.sh-chips');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let skin = 0, started = false, busy = false;
+  const ss = (k, v) => { try { return v === undefined ? sessionStorage.getItem(k) : sessionStorage.setItem(k, v); } catch (e) { return null; } };
+  const img = dog.querySelector('img'); let pose = 'idle', poseTimer = null, idleTimer = null;
+  const EYES = { idle: 1, tilt: 1 };
+  const src = (p, s) => `assets/shanti-v4/${p}-${SKINS[s]}.png`;
+  const eyel = dog.querySelector('.sh-eyel');
+  ['idle', 'tilt'].forEach(p => SKINS.forEach(k => { const i = new Image(); i.src = `assets/shanti-v4/eyes-${p}-${k}.png`; }));
+  function placeEyes(p) {
+    const on = !!EYES[p]; dog.classList.toggle('has-eyes', on);
+    if (on) eyel.src = `assets/shanti-v4/eyes-${p}-${SKINS[skin]}.png`;
+  }
+  let look = [0, 0];
+  addEventListener('pointermove', ev => {
+    const r = dog.getBoundingClientRect(), cx = r.left + r.width * .46, cy = r.top + r.height * .3;
+    const dx = ev.clientX - cx, dy = ev.clientY - cy, d = Math.hypot(dx, dy);
+    const n = d < 24 ? [0, 0] : [Math.abs(dx) / d > .38 ? Math.sign(dx) : 0, Math.abs(dy) / d > .38 ? Math.sign(dy) : 0];
+    if (n[0] === look[0] && n[1] === look[1]) return; look = n;
+    eyel.style.transform = `translate(${n[0] * 2}%, ${n[1] * 100 / 44}%)`;
+  }, { passive: true });
+  ['idle','happy','tilt','sleep','shake'].forEach(p => SKINS.forEach((_, k) => { const i = new Image(); i.src = src(p, k); }));
+  function setPose(p) { pose = p; img.src = src(p, skin); placeEyes(p); dog.classList.toggle('is-sleep', p === 'sleep'); }
+  function flash(p, ms) { clearTimeout(poseTimer); setPose(p); poseTimer = setTimeout(() => setPose(panel.classList.contains('is-open') ? 'tilt' : 'idle'), ms); }
+  function setSkin(i) { skin = i; flash('shake', 1400); }
+  function wake() { if (pose === 'sleep') setPose(panel.classList.contains('is-open') ? 'tilt' : 'idle'); clearTimeout(idleTimer); idleTimer = setTimeout(() => { if (!panel.classList.contains('is-open')) setPose('sleep'); }, 30000); }
+  setPose('idle');
+  ['pointermove', 'keydown', 'scroll', 'touchstart'].forEach(ev => addEventListener(ev, wake, { passive: true }));
+  wake();
+  dog.addEventListener('pointerenter', () => { if (!panel.classList.contains('is-open')) { clearTimeout(poseTimer); setPose('happy'); } });
+  dog.addEventListener('pointerleave', () => { if (!panel.classList.contains('is-open') && pose === 'happy') setPose('idle'); });
+  function scroll() { log.scrollTop = log.scrollHeight; }
+  function add(cls, html) { const d = document.createElement('div'); d.className = 'sh-msg sh-msg--' + cls; d.innerHTML = html; log.appendChild(d); scroll(); return d; }
+  function esc(t) { return t.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c])); }
+  function say(text, links) {
+    return new Promise(res => {
+      const d = add('bot', '<span class="sh-typing"><i></i><i></i><i></i></span>');
+      setTimeout(() => {
+        d.textContent = '';
+        const done = () => { if (links) { const w = document.createElement('div'); w.className = 'sh-links'; w.innerHTML = links.map(([t, h]) => `<a href="${h}" ${h.startsWith('http') ? 'target="_blank" rel="noopener"' : ''}>${esc(t)} ↗</a>`).join(''); d.appendChild(w); } scroll(); res(); };
+        if (reduce) { d.textContent = text; return done(); }
+        let i = 0; const span = document.createElement('span'); d.appendChild(span);
+        const tick = () => { i += 2; span.textContent = text.slice(0, i); scroll(); if (i < text.length) setTimeout(tick, 16); else done(); };
+        tick();
+      }, reduce ? 0 : 550);
+    });
+  }
+  let mode = 'main';
+  function chip(label, fn, used) { const b = document.createElement('button'); b.type = 'button'; b.className = 'sh-chip' + (used ? ' is-used' : ''); b.textContent = label; b.addEventListener('click', fn); chips.appendChild(b); }
+  function renderChips() {
+    chips.innerHTML = '';
+    if (mode === 'roles') { ROLES.forEach((r, k) => chip(r.q, () => askRole(k))); chip('← Назад', () => { mode = 'main'; renderChips(); }); return; }
+    Q.forEach((it, k) => chip(it.q, () => ask(k), it.used && !it.skin && !it.roles));
+  }
+  async function run(label, fn) {
+    if (busy) return; busy = true; chips.classList.add('is-busy'); add('me', esc(label));
+    await fn(); renderChips(); busy = false; chips.classList.remove('is-busy'); flash('happy', 1600);
+  }
+  function ask(k) {
+    const it = Q[k];
+    run(it.q, async () => {
+      it.used = true;
+      if (it.roles) { mode = 'roles'; await say('Выберите роль — дам сводку в три строки.'); }
+      else if (it.skin) { const n = (skin + 1) % SKINS.length; setSkin(n); await say(SKIN_TXT[SKINS[n]] + ' Один компонент — любая тема. Так устроены дизайн-системы Жанны.'); }
+      else await say(it.a, it.l);
+    });
+  }
+  function askRole(k) { const r = ROLES[k]; run(r.q, async () => { mode = 'main'; await say(r.a, r.l); }); }
+  function open() {
+    panel.classList.add('is-open'); dog.setAttribute('aria-expanded', 'true'); clearTimeout(poseTimer); setPose('tilt'); tease.classList.remove('is-on'); ss('sh-teased', '1');
+    if (!started) { started = true; renderChips(); say('Woof. Я Шанти, ассистент этого сайта. Отвечаю только фактами. С чего начнём?'); }
+    setTimeout(() => chips.querySelector('.sh-chip')?.focus({ preventScroll: true }), 50);
+  }
+  function close() { panel.classList.remove('is-open'); dog.setAttribute('aria-expanded', 'false'); setPose('idle'); wake(); }
+  dog.addEventListener('click', () => panel.classList.contains('is-open') ? close() : open());
+  panel.querySelector('.sh-close').addEventListener('click', () => { close(); dog.focus(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && panel.classList.contains('is-open')) { close(); dog.focus(); } });
+  tease.querySelector('button').addEventListener('click', () => { tease.classList.remove('is-on'); ss('sh-teased', '1'); });
+  tease.querySelector('span').addEventListener('click', open);
+
+  /* ---- перетаскивание ---- */
+  const KEY = 'sh-pos'; let drag = null, moved = false;
+  const ls = (v) => { try { return v === undefined ? JSON.parse(localStorage.getItem(KEY)) : localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) { return null; } };
+  function clampPos(x, y) { const r = dock.getBoundingClientRect(); return [Math.min(Math.max(8, x), innerWidth - r.width - 8), Math.min(Math.max(8, y), innerHeight - r.height - 8)]; }
+  function placeDock(x, y) { [x, y] = clampPos(x, y); dock.classList.add('is-free'); dock.style.left = x + 'px'; dock.style.top = y + 'px'; placePanel(); }
+  function placePanel() {
+    if (!dock.classList.contains('is-free')) { if (panel.classList.contains('is-free')) panel.classList.remove('is-free'); panel.style.left = panel.style.top = ''; return; }
+    const d = dog.getBoundingClientRect(), pw = panel.offsetWidth, ph = panel.offsetHeight;
+    let x = d.left + d.width / 2 - pw / 2; x = Math.min(Math.max(12, x), innerWidth - pw - 12);
+    let y = d.top - ph + d.height * .3; if (y < 12) y = Math.min(d.bottom - d.height * .2, innerHeight - ph - 12);
+    if (!panel.classList.contains('is-free')) panel.classList.add('is-free'); panel.style.left = x + 'px'; panel.style.top = Math.max(12, y) + 'px';
+  }
+  dog.addEventListener('dragstart', e => e.preventDefault());
+  dog.addEventListener('pointerdown', e => { if (e.button !== 0) return; e.preventDefault(); const r = dock.getBoundingClientRect(); drag = { dx: e.clientX - r.left, dy: e.clientY - r.top, sx: e.clientX, sy: e.clientY }; moved = false; dog.setPointerCapture(e.pointerId); });
+  dog.addEventListener('pointermove', e => {
+    if (!drag) return;
+    if (!moved && Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) < 6) return;
+    if (!moved) { moved = true; dock.classList.add('is-drag'); tease.classList.remove('is-on'); clearTimeout(poseTimer); setPose('happy'); }
+    placeDock(e.clientX - drag.dx, e.clientY - drag.dy);
+  });
+  function endDrag() { if (!drag) return; drag = null; if (moved) { dock.classList.remove('is-drag'); const r = dock.getBoundingClientRect(); ls([r.left / innerWidth, r.top / innerHeight]); setPose(panel.classList.contains('is-open') ? 'tilt' : 'idle'); } }
+  dog.addEventListener('pointerup', endDrag); dog.addEventListener('pointercancel', endDrag);
+  dog.addEventListener('click', e => { if (moved) { e.stopImmediatePropagation(); e.preventDefault(); moved = false; } }, true);
+  dog.addEventListener('dblclick', () => { dock.classList.remove('is-free'); dock.style.left = dock.style.top = ''; try { localStorage.removeItem(KEY); } catch (e) {} placePanel(); });
+  const saved = ls(); if (saved && saved.length === 2) requestAnimationFrame(() => placeDock(saved[0] * innerWidth, saved[1] * innerHeight));
+  addEventListener('resize', () => { if (dock.classList.contains('is-free')) { const r = dock.getBoundingClientRect(); placeDock(r.left, r.top); } });
+  dog.addEventListener('click', () => requestAnimationFrame(placePanel));
+  dog.title = 'Перетащите меня куда удобно · двойной клик — вернуть в угол';
+  if (!ss('sh-teased')) setTimeout(() => { if (!panel.classList.contains('is-open')) tease.classList.add('is-on'); }, 3500);
+})();
+</script>
+
+</body>
+</html>

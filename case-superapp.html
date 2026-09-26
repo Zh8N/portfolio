@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SuperApp: 10+ сервисов, одна система — Жанна Носова</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300..700&family=Martian+Mono:wght@300..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=7">
+<style>
+/* ===== Страница кейса: одна колонка текста, три формата визуала ===== */
+body { background: var(--paper); }
+.case-top { background: var(--ink); color: var(--paper); padding: 120px 0 64px; position: relative; overflow: hidden; }
+.case-top::before { content: ""; position: absolute; inset: -20%; background: radial-gradient(40% 55% at 70% 40%, rgba(75,47,168,.55), transparent 70%), radial-gradient(35% 45% at 15% 80%, rgba(36,26,107,.6), transparent 70%); filter: blur(30px); }
+.case-top .container { position: relative; }
+.back { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #8f86ff; text-decoration: none; }
+.case-top h1 { font-family: var(--sans); font-weight: 600; font-size: clamp(38px, 6vw, 84px); line-height: 1; letter-spacing: -.03em; margin: 28px 0 18px; }
+.case-top h1 em { font-family: var(--serif); font-style: italic; font-weight: 700; color: #bdb6e6; letter-spacing: 0; }
+.case-top .lead { max-width: 38em; font-size: clamp(16px, 1.4vw, 19px); color: rgba(245,245,242,.8); }
+.passport { display: grid; grid-template-columns: repeat(5, 1fr); margin-top: 48px; border-top: 1px solid var(--line-light); }
+.passport div { padding: 18px 18px 0 0; }
+.passport div + div { padding-left: 18px; border-left: 1px solid var(--line-light); }
+.passport dt { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #8f86ff; margin-bottom: 6px; }
+.passport dd { margin: 0; font-size: 15px; line-height: 1.5; }
+
+.case { padding: 72px 0 40px; }
+.col { max-width: 720px; }
+.case h2 { font-family: var(--serif); font-size: clamp(30px, 3.6vw, 44px); line-height: 1.1; margin: 88px 0 20px; }
+.case h2 .n { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--accent); letter-spacing: .08em; display: block; margin-bottom: 12px; }
+.case h3 { font-family: var(--sans); font-weight: 600; font-size: 21px; margin: 36px 0 10px; }
+.case p { font-size: 17px; line-height: 1.7; margin-bottom: 14px; color: #2a2833; }
+.callout { border: 1px solid var(--line); padding: 18px 22px; margin: 24px 0; font-size: 16px; line-height: 1.6; }
+.callout b { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
+.callout--role { background: #ecebf1; }
+.callout--role b { color: var(--text-2); }
+.callout--result { background: #f0eeff; border-color: rgba(107,92,255,.35); }
+.callout--result b { color: var(--accent); }
+.todo { background: #fff6e0; border: 1px dashed #d9a400; color: #6b5200; font-family: var(--mono); font-size: 13px; padding: 10px 14px; margin: 14px 0; }
+
+/* визуал: на всю ширину / 1:1 / три колонки */
+.v-full, .v-two, .v-three { margin: 32px 0; }
+.v-two { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+.v-three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.shot { aspect-ratio: 16 / 10; background: #14131a; border-radius: 10px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.shot::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 70% at 60% 40%, rgba(75,47,168,.5), transparent 70%); }
+.shot span { position: relative; font-family: var(--mono); font-size: 11px; color: #8f86ff; letter-spacing: .08em; text-transform: uppercase; }
+.v-three .shot { aspect-ratio: 9 / 16; }
+.shot img { position: absolute; inset: 6% 0; margin: auto; height: 88%; width: auto; max-width: 92%; object-fit: contain; border-radius: 18px; box-shadow: 0 20px 50px rgba(0,0,0,.45); }
+.v-three .shot img { inset: 0; height: 100%; max-width: 100%; border-radius: 10px; box-shadow: none; }
+.slide { width: 100%; height: auto; display: block; border-radius: 10px; background: #e9e9ef; }
+.v-four { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 32px 0; }
+.v-four .shot { aspect-ratio: 9 / 16; }
+.v-four .shot img { inset: 0; height: 100%; max-width: 100%; border-radius: 10px; box-shadow: none; }
+@media (max-width: 820px) { .v-four { grid-template-columns: 1fr 1fr; } }
+figcaption { font-family: var(--mono); font-size: 12px; color: var(--text-2); margin-top: 10px; line-height: 1.5; }
+
+/* карта модулей */
+.map { background: #14131a; border-radius: 10px; padding: clamp(20px, 3vw, 36px); color: var(--paper); }
+.map__head { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11px; color: #8f86ff; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 20px; }
+.map__core { text-align: center; margin: 0 auto 22px; border: 1px solid #6b5cff; background: #6b5cff; color: #fff; font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding: 10px 16px; width: max-content; }
+.map__groups { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.map__g { border: 1px solid rgba(245,245,242,.16); padding: 14px; }
+.map__g ul { list-style: none; margin: 0; padding: 0; }
+.map__g h4 { margin: 0 0 10px; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: #bdb6e6; }
+.map__g li { font-size: 14px; padding: 5px 0; border-top: 1px solid rgba(245,245,242,.08); color: rgba(245,245,242,.85); }
+.map__g li i { font-style: normal; font-family: var(--mono); font-size: 10px; color: #8f86ff; margin-left: 6px; }
+
+.results { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); margin: 28px 0; }
+.results div { padding: 20px 20px 0 0; }
+.results div + div { padding-left: 20px; border-left: 1px solid var(--line); }
+.results dt { font-family: var(--serif); font-weight: 700; font-size: 34px; line-height: 1.1; }
+.results dd { margin: 6px 0 0; font-family: var(--mono); font-size: 12px; color: var(--text-2); }
+.results dd::before { content: "// "; color: var(--accent); }
+
+.next { border-top: 1px solid var(--line); margin-top: 88px; padding-top: 28px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+.next a { color: var(--accent); text-decoration: none; font-weight: 600; }
+
+@media (max-width: 820px) {
+  .passport { grid-template-columns: 1fr 1fr; }
+  .passport div:nth-child(3) { border-left: 0; padding-left: 0; }
+  .v-two, .map__groups { grid-template-columns: 1fr; }
+  .v-three { grid-template-columns: 1fr 1fr; }
+  .results { grid-template-columns: 1fr; }
+  .results div + div { border-left: 0; padding-left: 0; }
+}
+
+/* ===== Слайды во всю ширину: сплошной лонгрид, подпись внутри полосы ===== */
+body, .case { background: #fff; }
+.bleed { margin: 64px 0 0; background: #fff; }
+.bleed + .bleed { margin-top: 0; }
+.bleed__img { position: relative; overflow: hidden; }
+.bleed__img::before, .bleed__img::after { content: ""; position: absolute; top: 0; bottom: 0; width: 50%; background-image: var(--img); background-repeat: no-repeat; background-size: 100000% 100%; }
+.bleed__img::before { left: 0; background-position: 0 0; }
+.bleed__img::after { right: 0; background-position: 100% 0; }
+.bleed .slide { position: relative; z-index: 1; display: block; width: 100%; max-width: 1400px; margin: 0 auto; border-radius: 0; background: none; }
+.bleed-cap { background: var(--cap, #fff); margin: 0; padding-top: 4px; padding-bottom: 40px; }
+.bleed-cap span { display: block; font-family: var(--mono); font-size: 12px; line-height: 1.5; color: var(--text-2); }
+.bleed--dark .bleed-cap span { color: rgba(255,255,255,.78); }
+.bleed + .container > .col > :first-child:not(h2) { margin-top: 56px; }
+
+/* Единая левая линия: текст стоит на сетке слайдов (поле слайда = 116 из 1400 px) */
+.case-top .container, .case .container, .bleed-cap {
+  --slide-w: min(100%, 1400px);
+  max-width: none;
+  padding-left: max(var(--gutter), calc((100% - var(--slide-w)) / 2 + var(--slide-w) * 0.0829));
+  padding-right: max(var(--gutter), calc((100% - var(--slide-w)) / 2 + var(--slide-w) * 0.0829));
+}
+.case h2 { margin-top: 96px; }
+/* ===== Заголовки в стиле слайдов кейса: один гротеск, моно-надзаголовок ===== */
+.case { --head: #12203c; --eyebrow: #0f56ec; }
+.case-top h1 { font-weight: 800; letter-spacing: -.035em; }
+.case-top h1 em { font-family: var(--sans); font-style: normal; font-weight: 800; letter-spacing: -.035em; }
+.case h2 { font-family: var(--sans); font-weight: 800; font-size: clamp(34px, 4.4vw, 58px); line-height: 1.04; letter-spacing: -.035em; color: var(--head); margin-bottom: 24px; }
+.case h2 .n { font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--eyebrow); margin-bottom: 20px; }
+.case h3 { font-family: var(--sans); font-weight: 700; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.25; letter-spacing: -.015em; color: var(--head); margin-top: 44px; }
+.results dt { font-family: var(--sans); font-weight: 800; letter-spacing: -.03em; color: var(--head); }
+.case .results dd::before { color: var(--eyebrow); }
+
+.callout--role { background: #f1f0f6; }
+/* шрифты как на главной */
+:root { --sans: "Geologica", "Helvetica Neue", Arial, sans-serif; --serif: "Geologica", "Helvetica Neue", Arial, sans-serif; --mono: "Martian Mono", ui-monospace, Menlo, monospace; }
+body { font-feature-settings: normal; }
+.case-top h1 em { font-family: var(--sans); font-style: normal; }
+.passport dd, .bleed-cap span, .case h2 .n { font-size: .92em; }
+/* черновые пометки скрыты до заполнения */
+.todo, .draft { display: none !important; }
+</style>
+</head>
+<body>
+
+<header class="site-header is-solid" id="top">
+  <a class="logo" href="index.html">Жанна Носова</a>
+  <nav class="nav" aria-label="Основная навигация">
+    <a href="index.html#work">Работы</a>
+    <a href="index.html#contact">Контакты</a>
+  </nav>
+</header>
+
+<section class="case-top">
+  <div class="container">
+    <a class="back" href="index.html#work">← Все работы</a>
+    <h1>SuperApp: 10+ сервисов, <em>одна система</em></h1>
+    <p class="lead">Первая цифровая платформа холдинга из топ-5 застройщиков России — с нуля. До неё работа шла на бумаге и в 1С. Теперь документооборот и рабочие сценарии живут в одном приложении, где видны маршрут, статус и ответственный.</p>
+    <dl class="passport">
+      <div><dt>Роль</dt><dd>Senior Product Designer / Design Lead · продуктовый дизайн end-to-end</dd></div>
+      <div><dt>Продукт</dt><dd>B2E SuperApp: веб и мобильная платформа</dd></div>
+      <div><dt>Масштаб</dt><dd>12 000+ сотрудников · 200+ объектов · 350+ экранов и состояний</dd></div>
+      <div><dt>Компания</dt><dd>МСУ-1 · 5-е место среди застройщиков России по объёму строительства (2021, данные компании)</dd></div>
+      <div><dt>Период</dt><dd>2022 — 2026</dd></div>
+    </dl>
+  </div>
+</section>
+
+<main class="case">
+  <div class="container"><div class="col">
+
+    <div class="callout callout--role"><b>Роль</b>Единственный дизайнер компании. SuperApp — с нуля: сценарии, структура, UI Kit, дизайн-ревью, контроль реализации. Позже приняла от подрядчиков корпоративный портал и вела все цифровые сервисы: сайт, порталы, документооборот. Работала с внутренней командой и внешним подрядчиком мобильной платформы.</div>
+
+  </div></div>
+  <figure class="bleed" style="--img:url('https://mir-s3-cdn-cf.behance.net/project_modules/1400/30780e253221441.6a6314a52f38c.png'); --cap:#fff"><div class="bleed__img"><img class="slide" src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/30780e253221441.6a6314a52f38c.png" alt="Контекст и масштаб SuperApp" loading="lazy"></div><figcaption class="bleed-cap"><span>Контекст и масштаб · 10+ модулей, 350+ экранов и состояний · один дизайнер на весь цикл</span></figcaption></figure>
+  <div class="container"><div class="col">
+    <h2><span class="n">01</span>Контекст и задача</h2>
+    <p>Когда я пришла, у холдинга не было цифровой платформы: ни приложения, ни корпоративного портала. Работа с документами, заявками и объектами шла на бумаге, из цифровых систем была только 1С.</p>
+    <p>Задача — с нуля сделать одно приложение для 12 000+ сотрудников и 200+ объектов, где у каждого действия виден маршрут, статус и ответственный. Корпоративный портал параллельно начинали подрядчики; позже его передали мне, и дальше все цифровые сервисы компании — сайт, порталы, документооборот — вела я одна.</p>
+    <h3>Сценарий: замечание на объекте</h3>
+    <p><b>Было.</b> Чтобы закрыть замечание по стройке, человек приезжал на объект, фиксировал, что всё исправлено, и подписывал акты на бумаге.</p>
+    <p><b>Стало.</b> Он делает фотографии в приложении — и замечание закрывается или уходит на доработку. Так же через телефон приходят задания и идёт документооборот.</p>
+    <p>Итог для сотрудника на стройке: с телефоном в руках он решает на месте дела, для которых раньше нужен был компьютер или поездка в офис.</p>
+  </div></div>
+  <figure class="bleed" style="--img:url('https://mir-s3-cdn-cf.behance.net/project_modules/1400/7087d4253221441.6a6314a530dbe.png'); --cap:#fff"><div class="bleed__img"><img class="slide" src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/7087d4253221441.6a6314a530dbe.png" alt="Сценарий согласования в пять шагов" loading="lazy"></div><figcaption class="bleed-cap"><span>Сценарий согласования · 5 шагов · видно, на ком остановилась цепочка, и можно напомнить коллеге, не выходя из приложения</span></figcaption></figure>
+  <div class="container"><div class="col">
+    <h3>А надо ли было это делать?</h3>
+    <p>Дорабатывать было нечего: цифровой платформы не существовало. Вопрос был в другом — какой инструмент решает задачи бизнеса.</p>
+    <p>Корпоративный портал (веб и мобильная версия) рассчитан на сотрудников в офисе и закрывает корпоративные задачи. А процессы, от которых зависит стройка, — согласования, заказы, задания и их подтверждение — происходят на объекте. Поэтому им нужно отдельное приложение: портал и SuperApp делят работу, а не дублируют друг друга.</p>
+
+    <h2><span class="n">02</span>Система модулей</h2>
+    <p>Приложение состоит из сервисных модулей вокруг главного экрана. Все они собраны из одного UI Kit, поэтому новый модуль добавляется без нового визуального языка.</p>
+  </div></div>
+
+  <div class="container">
+    <figure class="v-full">
+      <div class="map">
+        <div class="map__head"><span>superapp / карта модулей</span><span>по файлу UI Kit 06/26</span></div>
+        <div class="map__core">Главный экран · переходы в разделы</div>
+        <div class="map__groups">
+          <div class="map__g"><h4>Вход и доступ</h4><ul><li>Авторизация</li><li>Авторизация в Keycloak</li><li>Гостевой вход<i>подрядчики</i></li><li>Обучающий экран</li><li>Обновление</li></ul></div>
+          <div class="map__g"><h4>Работа на объекте</h4><ul><li>План заданий</li><li>Численность на объекте</li><li>QR-код, инфо по объектам</li><li>Стройсервис</li><li>Заказ бетона</li><li>Заказы ТМЦ<i>прототип</i></li></ul></div>
+          <div class="map__g"><h4>Документы и связь</h4><ul><li>СЭД</li><li>Уведомления</li><li>Контакты</li></ul></div>
+          <div class="map__g"><h4>Жизнь компании</h4><ul><li>Новости</li><li>Хочу рассказать</li><li>Advertising</li><li>Профиль</li></ul></div>
+        </div>
+      </div>
+      <figcaption>Карта · все модули приложения · сгруппированы по задаче сотрудника, а не по отделам-владельцам</figcaption>
+    </figure>
+  </div>
+
+  <figure class="bleed" style="--img:url('https://mir-s3-cdn-cf.behance.net/project_modules/1400/e0102b253221441.6a6314a531763.png'); --cap:rgb(243,247,254)"><div class="bleed__img"><img class="slide" src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/e0102b253221441.6a6314a531763.png" alt="Три рабочих контекста: уведомления, СЭД, численность" loading="lazy"></div><figcaption class="bleed-cap"><span>Три контекста · уведомления, СЭД, численность · одна логика: что изменилось → документ в действие → факт на объекте</span></figcaption></figure>
+  <figure class="bleed" style="--img:url('https://mir-s3-cdn-cf.behance.net/project_modules/1400/d6e941253221441.6a6314a52fc62.png'); --cap:#fff"><div class="bleed__img"><img class="slide" src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/d6e941253221441.6a6314a52fc62.png" alt="Сценарий от услуги до оплаты" loading="lazy"></div><figcaption class="bleed-cap"><span>Стройсервис · от услуги до оплаты · каталог, заказ и статус в одном потоке</span></figcaption></figure>
+  <div class="container"><div class="col">
+
+    <h2><span class="n">03</span>Развилки</h2>
+    <h3>Доступ: один экран для всех или разделы по ролям</h3>
+    <p>Разделы нужны не всем. Контакты, личные настройки и новости видит каждый, а рабочие сервисы открываются в зависимости от роли. Например, у меня как у дизайнера не было доступа к заказу бетона — это не моя задача. Решение: каждый раздел доступен по роли сотрудника, и человек видит только свою работу.</p>
+    <h3>Навигация: кнопки на главном или виджеты</h3>
+    <p><b>Вариант А — простой главный экран.</b> Пока разделов было немного, хватало приветствия, уведомлений, строки поиска и нескольких кнопок: контакты, новости, пара рабочих разделов.</p>
+    <p><b>Что изменилось.</b> Разделы начали разрастаться, и главный экран перегрузился — его нужно было облегчить.</p>
+    <p><b>Вариант Б — редизайн на виджетах.</b> Главный экран разделили на виджеты с тем же доступом по ролям: каждый видит блоки своих задач, а не общий список кнопок. Редизайн спроектировала я; внедрение шло уже после моего ухода из компании.</p>
+  </div></div>
+  <figure class="bleed" style="--img:url('https://mir-s3-cdn-cf.behance.net/project_modules/1400/617f50253221441.6a6314a53051d.png'); --cap:rgb(243,247,254)"><div class="bleed__img"><img class="slide" src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/617f50253221441.6a6314a53051d.png" alt="Главный экран на виджетах" loading="lazy"></div><figcaption class="bleed-cap"><span>Главный экран · редизайн на виджетах · «Сегодня важно» наверху, сетка сервисов по роли ниже</span></figcaption></figure>
+  <div class="container"><div class="col">
+    <h3>Тапбар: три варианта нижней навигации</h3>
+    <p>Для перехода между главным экраном, контактами, обсуждениями, сканером QR и настройками я сделала три варианта тапбара: стандартный с центральной кнопкой «Обсуждение», тапбар «островком» и вариант без кнопки чатов — для ролей, у которых нет доступа к обсуждениям.</p>
+  </div></div>
+
+
+  <div class="container"><div class="col">
+    <h2><span class="n">04</span>Дизайн-система</h2>
+    <p>UI Kit на 950+ компонентов для мобильной платформы. По нему собирали экраны и внутренняя команда портала, и внешний подрядчик мобильной платформы. Паттерны закрывают сложные рабочие сценарии: маршрут документа, статусы, роли.</p>
+  </div></div>
+
+  <figure class="bleed" style="--img:url('https://mir-s3-cdn-cf.behance.net/project_modules/1400/78d0d4253221441.6a6314a5300f0.png'); --cap:#fff"><div class="bleed__img"><img class="slide" src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/78d0d4253221441.6a6314a5300f0.png" alt="Дизайн-система: контексты, паттерны, компоненты" loading="lazy"></div><figcaption class="bleed-cap"><span>Дизайн-система · контексты → паттерны → компоненты → продуктовый экран · один язык для всех модулей</span></figcaption></figure>
+  <figure class="bleed bleed--dark" style="--img:url('https://mir-s3-cdn-cf.behance.net/project_modules/1400/9863e2253221441.6a6314a531309.png'); --cap:linear-gradient(90deg, rgb(31,79,205) calc(50% - 700px), rgb(46,109,232) calc(50% + 700px))"><div class="bleed__img"><img class="slide" src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/9863e2253221441.6a6314a531309.png" alt="Три правила и зона ответственности" loading="lazy"></div><figcaption class="bleed-cap"><span>Принципы · сначала статус, действие рядом с задачей, единый язык состояний · зона ответственности — целостность продукта</span></figcaption></figure>
+
+  <div class="container"><div class="col">
+    <h2><span class="n">05</span>Состояния и роли</h2>
+    <p>Для каждого модуля продуманы пустое состояние, ошибка, заполненный экран и отличия по ролям. Главный экран собирается под роль: при полном доступе сотрудник видит все рабочие разделы, при ограниченном — только свои.</p>
+  </div></div>
+  <div class="container"><div class="col">
+  </div></div>
+
+  <figure class="bleed" style="--img:url('https://mir-s3-cdn-cf.behance.net/project_modules/1400/9f9e21253221441.6a6314a52f83c.png'); --cap:#fff"><div class="bleed__img"><img class="slide" src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/9f9e21253221441.6a6314a52f83c.png" alt="Разные сценарии на одной системе" loading="lazy"></div><figcaption class="bleed-cap"><span>Сценарии · заказ, план заданий, задание · одна UI-иерархия, язык статусов и предсказуемое действие</span></figcaption></figure>
+  <figure class="bleed" style="--img:url('https://mir-s3-cdn-cf.behance.net/project_modules/1400/bed133253221441.6a6314a531fdf.png'); --cap:rgb(249,250,255)"><div class="bleed__img"><img class="slide" src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/bed133253221441.6a6314a531fdf.png" alt="Светлая и тёмная тема" loading="lazy"></div><figcaption class="bleed-cap"><span>Темы · светлая и тёмная · иерархия, статусы и акценты сохраняются</span></figcaption></figure>
+
+  <div class="container"><div class="col">
+    <h2><span class="n">06</span>Результат и рефлексия</h2>
+    <dl class="results">
+      <div><dt>12 000+</dt><dd>сотрудников в одном приложении</dd></div>
+      <div><dt>10+</dt><dd>сервисных модулей</dd></div>
+      <div><dt>950+</dt><dd>компонентов в UI Kit</dd></div>
+    </dl>
+    <div class="callout callout--result"><b>💡 Результат</b>Одно корпоративное приложение для 12 000+ сотрудников и 200+ объектов. UI Kit стал общим стандартом для внутренней команды и внешнего подрядчика.</div>
+    <h3>Гипотезы</h3>
+    <p><b>Опровергнута:</b> «простого главного экрана с кнопками хватит». Сработало на старте, но с ростом числа разделов экран перегрузился — понадобился редизайн.</p>
+    <p><b>Подтверждена:</b> «доступ по ролям снижает шум». Сотрудник видит только свои сервисы, поэтому этот принцип перенесли и в редизайн на виджетах.</p>
+    <p><b>Не проверена мной:</b> «виджеты разгрузят главный экран». Редизайн спроектирован, но его внедрение прошло уже без меня.</p>
+
+    <nav class="next"><a href="index.html#work">← Все работы</a><a href="https://www.behance.net/gallery/253221441/SuperApp-10-servisov-odna-sistema" target="_blank" rel="noopener">Этот кейс на Behance ↗</a></nav>
+  </div></div>
+</main>
+
+<footer class="footer" style="max-width:none;margin:0;background:var(--ink)"><p style="max-width:1120px;margin:0 auto">© 2026 Жанна Носова</p></footer>
+</body>
+</html>
